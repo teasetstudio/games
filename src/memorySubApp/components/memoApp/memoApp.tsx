@@ -1,7 +1,7 @@
 import MemoTable from '../memoTable/memoTable';
 import Header from '../header/header';
 
-const MemoApp = () => {
+const MemoApp: React.FC = () => {
     return (
         <div>
             <Header />

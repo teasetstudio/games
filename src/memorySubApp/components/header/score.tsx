@@ -1,8 +1,14 @@
 import { connect } from 'react-redux';
 import './score.scss';
 
-const Score: React.FC = ({ curPlayer, redScore, blueScore }: any) => {
-    const activeClass = curPlayer === 'red' ? 'active-red' : 'active-blue';
+type TScore = {
+    curPlayer: string,
+    redScore: number,
+    blueScore: number
+}
+
+const Score = ({ curPlayer, redScore, blueScore }: TScore) => {
+    const activeClass: string = curPlayer === 'red' ? 'active-red' : 'active-blue';
     return (
         <>
         <div className={`score ${activeClass}`}>
@@ -15,8 +21,11 @@ const Score: React.FC = ({ curPlayer, redScore, blueScore }: any) => {
         </>
     )
 }
-
-const mapStateToProps = ({ curPlayer, score }: any) => ({ 
+type TState = {
+    curPlayer: string,
+    score: { [key: string]: number }
+}
+const mapStateToProps = ({ curPlayer, score }: TState) => ({ 
     curPlayer,
     redScore: score.red,
     blueScore: score.blue

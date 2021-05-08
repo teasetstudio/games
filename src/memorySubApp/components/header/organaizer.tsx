@@ -6,7 +6,7 @@ interface IOrganizer {
     toggleMenu(menuOpen: boolean): void
 }
 
-const Organaizer:React.FC<IOrganizer> = ({ clicks, toggleMenu }) => {
+const Organaizer = ({ clicks, toggleMenu }: IOrganizer) => {
     return (
         <div className='organaizer'>
             <button className="organaizer__btn-menu"
@@ -17,6 +17,8 @@ const Organaizer:React.FC<IOrganizer> = ({ clicks, toggleMenu }) => {
         </div>
     )
 }
-
-const mapStateToProps = ({score}: any) => ({clicks: score.clicks})
+type TState = {
+    score: {[key:string]: number}
+}
+const mapStateToProps = ({score}: TState) => ({clicks: score.clicks})
 export default connect(mapStateToProps)(Organaizer)

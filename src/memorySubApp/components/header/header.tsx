@@ -8,9 +8,13 @@ import Score from './score';
 import Organaizer from './organaizer';
 import './header.scss';
 
-const Header: React.FC<any> = ({ players, isWin }) => {
+type THeader = {
+    players: number,
+    isWin: boolean
+}
 
-    const [menuOpen, toggleMenu] = useState<boolean>(false);
+const Header = ({ players, isWin }: THeader) => {
+    const [menuOpen, toggleMenu] = useState(false);
 
     return (
         <div className='header'>
@@ -29,6 +33,6 @@ const Header: React.FC<any> = ({ players, isWin }) => {
     )
 }
 
-const mapStateToProps = ({ players, isWin }: any) => ({players, isWin})
+const mapStateToProps = ({ players, isWin }: THeader) => ({players, isWin})
 
 export default connect(mapStateToProps, action)(Header)

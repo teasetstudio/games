@@ -3,6 +3,12 @@ import * as actions from '../../memoActions';
 import MemoItem from '../memoItem/memoItem';
 import './memoTable.scss';
 
+// type TTable = {
+//     memoTable: any[],
+//     tableSize: number,
+//     clicks: number,
+//     openMemo(id:number): void
+// }
 const MemoTable = ({ memoTable, tableSize, clicks, openMemo }: any) => {
 
     return (
@@ -17,7 +23,12 @@ const MemoTable = ({ memoTable, tableSize, clicks, openMemo }: any) => {
         </div>
     )
 }
-const setStateToProps = ({ memoTable, tableSize, score }: any) => ({
+type TState = {
+    memoTable: any[],
+    tableSize: number,
+    score: {[key: string]: number}
+}
+const setStateToProps = ({ memoTable, tableSize, score }: TState) => ({
     memoTable,
     tableSize,
     clicks: score.clicks

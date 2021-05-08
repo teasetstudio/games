@@ -2,9 +2,7 @@ import {Link} from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import './burger.scss';
 
-
-const BurgerMenu = () => {
-
+const BurgerMenu: React.FC = () => {
     return (
         <Menu right>
             <Link id="home" className="menu-item" to="/">Home</Link>

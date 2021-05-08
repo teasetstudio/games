@@ -5,11 +5,9 @@ import {Memory} from '../pages/pages';
 import './app.scss';
 
 const App: React.FC = () => {
-
     return(
         <Router>
             <BurgerMenu />
-
 
             {/* <Route path='/' exact render={() => <h1>Coming soon</h1>} /> */}
             <Route path='/' exact component={Memory} />

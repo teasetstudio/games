@@ -1,6 +1,8 @@
 import { heroes, heroes2 } from './initialRecords';
+import { Actions } from './types';
 
-function setMemoTable(size = 20) {
+
+function setMemoTable(size: number = 20): any[] {
     const IMGNUM_IN_FOLDER = 130
     let memoTable: any[] = [];
     for (let i = 0; i < size; i++) {
@@ -71,7 +73,8 @@ const initialState: IState = {
 }
 const memoReducer = (state = initialState, action: any) => {
     const { players, tableSize, memoTable, clickIndex, memoPair, curPlayer, score, records } = state;
-    switch (action.type) {
+    const { memoId, imgNum, size, type, name } = action;
+    switch (type) {
         case 'SET__PLAYERS':
             const randNum: number = action.players === 1 ? 1 : Math.floor(Math.random() * 2);
             const firstPlayer: string = randNum ? 'blue' : 'red';
@@ -85,15 +88,15 @@ const memoReducer = (state = initialState, action: any) => {
 
         case 'RESTART':
             return {
-                ...state, memoTable: setMemoTable(action.size),
-                tableSize: action.size,
+                ...state, memoTable: setMemoTable(size),
+                tableSize: size,
                 score: initialState.score,
                 isWin: false,
-                records: action.size === 20 ? heroes : heroes2
+                records: size === 20 ? heroes : heroes2
             };
 
         case 'OPEN__MEMO':
-            const { memoId, imgNum } = action;
+            
             const [ memo1, memo2 ] = memoPair;
 
             let newMemoTable: any[] = toggleMemo(memoTable, memoId, true);
@@ -141,7 +144,7 @@ const memoReducer = (state = initialState, action: any) => {
                 ...state, memoTable: setMemoTable(tableSize),
                 score: initialState.score,
                 isWin: false,
-                records: saveRes(action.name, score.clicks, records, tableSize)
+                records: saveRes(name, score.clicks, records, tableSize)
             };
 
         default:

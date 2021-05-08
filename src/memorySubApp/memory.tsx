@@ -1,16 +1,17 @@
 import MemoApp from './components/memoApp/memoApp';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import memoReducer from './memoReducer';
 
-const memoStore = createStore(memoReducer);
-
-const update = () => {
-    // localStorage.setItem('players', JSON.stringify(memoStore.getState().players));
-    //console.log(memoStore.getState().score.total);
-    //console.log(memoStore.getState().records);
+// For redux dev tools - google chrome extention
+declare global {
+    interface Window {
+      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
 }
-memoStore.subscribe(update);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const memoStore = createStore(memoReducer, composeEnhancers());
 
 const Memory = () => {
     return (

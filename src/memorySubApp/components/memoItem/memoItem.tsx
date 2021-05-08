@@ -3,13 +3,13 @@ import './memoItem.scss';
 interface IMemoItem {
     id: number,
     imgNum: number,
-    isOpen: boolean,
+    isOpen: boolean | string,
     clicks: number,
-    openMemo(): void
+    openMemo(id: number, imgNum: number): void
 }
 
-const MemoItem: React.FC<IMemoItem> = ({id, imgNum, isOpen, clicks, openMemo}: any) => {
-    const img = require(`../../img/${imgNum}.png`).default;
+const MemoItem = ({id, imgNum, isOpen, clicks, openMemo}: IMemoItem) => {
+    const img: string = require(`../../img/${imgNum}.png`).default;
     return (
         <div className="memo"
             onClick={() => isOpen ? false : openMemo(id, imgNum)} >
@@ -26,6 +26,5 @@ const MemoItem: React.FC<IMemoItem> = ({id, imgNum, isOpen, clicks, openMemo}: a
         </div>
     )
 }
-
 
 export default MemoItem;

@@ -2,7 +2,13 @@ import { connect } from 'react-redux'
 import * as action from '../../memoActions';
 import './menu.scss';
 
-const Menu = ({ menuOpen, toggleMenu, setPlayers, restart }:any) => {
+type TMenu = {
+    menuOpen: boolean,
+    toggleMenu(is: boolean): void,
+    setPlayers(num: number): void,
+    restart(size: number): void
+}
+const Menu = ({ menuOpen, toggleMenu, setPlayers, restart }: TMenu) => {
     return (
         <div className={`menu ${menuOpen ? 'menu_open' : null}`}
             onMouseLeave={() => toggleMenu(false)}

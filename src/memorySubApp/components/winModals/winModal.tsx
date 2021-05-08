@@ -1,22 +1,22 @@
-import { useEffect, useRef } from 'react';
+import { ReactElement, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../memoActions';
 import './winModal.scss';
 
-// interface IWinModal {
-//     players: number,
-//     tableSize: number,
-//     click: number,
-//     records: {name: string, score: number}[],
-//     blueScore: number,
-//     redScore: number,
-//     saveResult(): void,
-//     restart(): void
-// }
+interface IWinModal {
+    players: number,
+    tableSize: number,
+    clicks: number,
+    records: {name: string, score: number}[],
+    blueScore: number,
+    redScore: number,
+    saveResult(input: string): void,
+    restart(size: number): void
+}
 
-const WinModal: React.FC = ({ players, tableSize, clicks, records, redScore, blueScore, saveResult, restart }: any) => {
+const WinModal = ({ players, tableSize, clicks, records, redScore, blueScore, saveResult, restart }: IWinModal) => {
     let name = useRef<HTMLInputElement>(null);
-    const whoWin = blueScore === redScore ? false : blueScore > redScore ? 'СИНИЙ' : 'КРАСНЫЙ';
+    const whoWin: string | boolean = blueScore === redScore ? false : blueScore > redScore ? 'СИНИЙ' : 'КРАСНЫЙ';
 
     let place: number = 1;
     for (let el of records){
@@ -26,9 +26,9 @@ const WinModal: React.FC = ({ players, tableSize, clicks, records, redScore, blu
         place++;
     }
 
-    function setName(e: React.FormEvent) {
+    function setName(e: React.FormEvent<HTMLFormElement>): void {
         e.preventDefault();
-        const inputName = name.current!.value
+        const inputName: string = name.current!.value
 
         saveResult(inputName);
     }
@@ -39,7 +39,7 @@ const WinModal: React.FC = ({ players, tableSize, clicks, records, redScore, blu
         }
     });
 
-    const onePlayerForm = (
+    const onePlayerForm: ReactElement = (
         <form onSubmit={setName}>
             <h3>Поздравляю!</h3>
             <p>Ты справился за <span className="modal__result">{clicks}</span> кликов.</p>
@@ -59,7 +59,7 @@ const WinModal: React.FC = ({ players, tableSize, clicks, records, redScore, blu
         </form>
     )
 
-    const twoPlayersForm = (
+    const twoPlayersForm: ReactElement = (
         <form onSubmit={setName}>
             {whoWin ? (<h3>Победил <span className='winner'>{whoWin}</span></h3>) : <h3>Ничья</h3>}
             <p>Вместе вы использовали <span className="modal__result">{clicks}</span> кликов,</p>
@@ -88,8 +88,13 @@ const WinModal: React.FC = ({ players, tableSize, clicks, records, redScore, blu
         </div>
     )
 }
-
-const mapStateToProps = ({ players, score, tableSize, records }: any) => ({
+type TState = {
+    players: number,
+    tableSize: number,
+    score: { [key: string]: number },
+    records: {name: string, score: number}[]
+}
+const mapStateToProps = ({ players, tableSize, score, records }: TState) => ({
     players,
     tableSize,
     clicks: score.clicks,
