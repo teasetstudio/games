@@ -1,0 +1,29 @@
+@import '../../variables.scss';
+.organaizer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__btn-menu{
+        padding: 7px;
+        border: 1px solid $black;
+        border-radius: 7px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        transition: background .3s ease;
+        cursor: pointer;
+        outline: none;
+        &:hover{
+            background: $white;
+        }
+    }
+    &__clicks{
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: $black;
+        margin-left: 30px;
+        span{
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    }
+}
