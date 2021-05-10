@@ -1,4 +1,5 @@
 import { heroes, heroes2 } from './initialRecords';
+import { AnyAction } from 'redux';
 import { MemoTable, Rec, Score } from './types';
 
 function setMemoTable(size: number = 20): MemoTable {
@@ -69,7 +70,7 @@ const initialState: IState = {
     isWin: false,
     records: heroes
 }
-const memoReducer = (state = initialState, action: any) => {
+const memoReducer = (state = initialState, action: AnyAction) => {
     const { players, tableSize, memoTable, clickIndex, memoPair, curPlayer, score, records } = state;
     const { memoId, imgNum, size, type, name } = action;
     switch (type) {
@@ -77,6 +78,7 @@ const memoReducer = (state = initialState, action: any) => {
             const randNum: number = action.players === 1 ? 1 : Math.floor(Math.random() * 2);
             const firstPlayer: string = randNum ? 'blue' : 'red';
             return { ...state, players: action.players,
+                clickIndex: 1,
                 curPlayer: firstPlayer,
                 score: initialState.score,
                 memoTable: setMemoTable(tableSize),
@@ -86,6 +88,7 @@ const memoReducer = (state = initialState, action: any) => {
         case 'RESTART':
             return {
                 ...state, memoTable: setMemoTable(size),
+                clickIndex: 1,
                 tableSize: size,
                 score: initialState.score,
                 isWin: false,
@@ -141,6 +144,7 @@ const memoReducer = (state = initialState, action: any) => {
         case 'SAVE__RESULT':
             return {
                 ...state, memoTable: setMemoTable(tableSize),
+                clickIndex: 1,
                 score: initialState.score,
                 isWin: false,
                 records: saveRes(name, score.clicks, records, tableSize)

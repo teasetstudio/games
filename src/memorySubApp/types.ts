@@ -27,6 +27,6 @@ export type MemoTable = {
 }[]
 // reacords array
 export type Rec = {name: string, score: number}[];
-// score object
+// scores object
 export type Score = { [key: string]: number };
 
