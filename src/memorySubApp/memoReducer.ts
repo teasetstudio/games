@@ -1,8 +1,7 @@
 import { heroes, heroes2 } from './initialRecords';
-import { Actions } from './types';
+import { MemoTable, Rec } from './types';
 
-
-function setMemoTable(size: number = 20): any[] {
+function setMemoTable(size: number = 20): MemoTable {
     const IMGNUM_IN_FOLDER = 130
     let memoTable: any[] = [];
     for (let i = 0; i < size; i++) {
@@ -26,16 +25,15 @@ function setMemoTable(size: number = 20): any[] {
         .map((imgNum, id) => ({ imgNum, id, isOpen: false }));
 }
 
-function toggleMemo(memoTable: any[], memoId: number, isOpen: boolean | string) {
+function toggleMemo (memoTable: MemoTable, memoId: number, isOpen: boolean | string): MemoTable {
     const old = memoTable[memoId];
     let newItem = { ...old, isOpen: isOpen };
     const newArr = [...memoTable.slice(0, memoId), newItem, ...memoTable.slice(memoId + 1)];
     return newArr;
 }
-type TRec = {name: string, score: number}[];
 
-function saveRes ( name: string, score: number, records: TRec, tableSize: number) {
-    let newRec: TRec = [...records, {name, score}].sort((a: any,b: any) => a.score - b.score);
+function saveRes ( name: string, score: number, records: Rec, tableSize: number): Rec {
+    let newRec = [...records, {name, score}].sort((a: any,b: any) => a.score - b.score);
     newRec.pop();
 
     const category = tableSize === 20 ? 'heroes' : 'heroes2';
@@ -47,13 +45,13 @@ function saveRes ( name: string, score: number, records: TRec, tableSize: number
 interface IState {
     players: number,
     tableSize: number,
-    memoTable: { [key: string]: boolean | number }[],
+    memoTable: MemoTable,
     clickIndex: number,
     memoPair: any[],
-    curPlayer: any,
+    curPlayer: string,
     score: { [key: string]: number },
     isWin: boolean,
-    records: {name: string, score: number}[]
+    records: Rec
 }
 const initialState: IState = {
     players: 1,
@@ -96,16 +94,14 @@ const memoReducer = (state = initialState, action: any) => {
             };
 
         case 'OPEN__MEMO':
-            
             const [ memo1, memo2 ] = memoPair;
 
-            let newMemoTable: any[] = toggleMemo(memoTable, memoId, true);
+            let newMemoTable: MemoTable = toggleMemo(memoTable, memoId, true);
             let nextClickIndex: number = clickIndex + 1;
             let updatedMemoPair: any[] = [...memoPair, { memoId, imgNum }];
             let nextPlayer: string = curPlayer;
             let isWinChecker: boolean = false;
             const updatedScore: { [key: string]: number } = { ...score };
-
             updatedScore.clicks++;
             // close unequal memos pair
             if (clickIndex === 1 && memo2) {

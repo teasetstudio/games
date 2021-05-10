@@ -1,4 +1,4 @@
-// actions
+// ACTIONS
 interface IPlayers {
     type: string,
     players: number
@@ -18,4 +18,13 @@ interface ISave {
 }
 export type Actions = IPlayers | IRestart | IOpen | ISave
 
-// reducer
+// STATES
+// main memo table array
+export type MemoTable = {
+    imgNum: number,
+    id: number,
+    isOpen: boolean | string
+}[]
+// reacords array
+export type Rec = {name: string, score: number}[];
+

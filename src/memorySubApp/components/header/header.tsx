@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import * as action from '../../memoActions';
+import * as actions from '../../memoActions';
 import WinModal from '../winModals/winModal';
 import Menu from '../menu/Menu';
 import Records from './records';
@@ -35,4 +35,4 @@ const Header = ({ players, isWin }: THeader) => {
 
 const mapStateToProps = ({ players, isWin }: THeader) => ({players, isWin})
 
-export default connect(mapStateToProps, action)(Header)
+export default connect(mapStateToProps, actions)(Header)

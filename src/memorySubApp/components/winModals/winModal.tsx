@@ -1,13 +1,14 @@
-import { ReactElement, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../memoActions';
+import { Rec } from '../../types';
 import './winModal.scss';
 
 interface IWinModal {
     players: number,
     tableSize: number,
     clicks: number,
-    records: {name: string, score: number}[],
+    records: Rec,
     blueScore: number,
     redScore: number,
     saveResult(input: string): void,
@@ -19,8 +20,8 @@ const WinModal = ({ players, tableSize, clicks, records, redScore, blueScore, sa
     const whoWin: string | boolean = blueScore === redScore ? false : blueScore > redScore ? 'СИНИЙ' : 'КРАСНЫЙ';
 
     let place: number = 1;
-    for (let el of records){
-        if (el.score >= clicks){
+    for (let rec of records){
+        if (rec.score >= clicks){
             break;
         }
         place++;
@@ -35,11 +36,11 @@ const WinModal = ({ players, tableSize, clicks, records, redScore, blueScore, sa
 
     useEffect(() => {
         if (name.current) {
-            name.current!.focus();
+            name.current.focus();
         }
     });
 
-    const onePlayerForm: ReactElement = (
+    const onePlayerForm: React.ReactElement = (
         <form onSubmit={setName}>
             <h3>Поздравляю!</h3>
             <p>Ты справился за <span className="modal__result">{clicks}</span> кликов.</p>
@@ -59,7 +60,7 @@ const WinModal = ({ players, tableSize, clicks, records, redScore, blueScore, sa
         </form>
     )
 
-    const twoPlayersForm: ReactElement = (
+    const twoPlayersForm: React.ReactElement = (
         <form onSubmit={setName}>
             {whoWin ? (<h3>Победил <span className='winner'>{whoWin}</span></h3>) : <h3>Ничья</h3>}
             <p>Вместе вы использовали <span className="modal__result">{clicks}</span> кликов,</p>
@@ -92,7 +93,7 @@ type TState = {
     players: number,
     tableSize: number,
     score: { [key: string]: number },
-    records: {name: string, score: number}[]
+    records: Rec
 }
 const mapStateToProps = ({ players, tableSize, score, records }: TState) => ({
     players,

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import * as action from '../../memoActions';
+import * as actions from '../../memoActions';
 import './menu.scss';
 
 type TMenu = {
@@ -27,4 +27,4 @@ const Menu = ({ menuOpen, toggleMenu, setPlayers, restart }: TMenu) => {
     )
 }
 
-export default connect(null, action)(Menu)
+export default connect(null, actions)(Menu)
