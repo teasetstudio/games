@@ -1,5 +1,5 @@
 import { heroes, heroes2 } from './initialRecords';
-import { MemoTable, Rec } from './types';
+import { MemoTable, Rec, Score } from './types';
 
 function setMemoTable(size: number = 20): MemoTable {
     const IMGNUM_IN_FOLDER = 130
@@ -49,7 +49,7 @@ interface IState {
     clickIndex: number,
     memoPair: any[],
     curPlayer: string,
-    score: { [key: string]: number },
+    score: Score,
     isWin: boolean,
     records: Rec
 }
@@ -76,7 +76,6 @@ const memoReducer = (state = initialState, action: any) => {
         case 'SET__PLAYERS':
             const randNum: number = action.players === 1 ? 1 : Math.floor(Math.random() * 2);
             const firstPlayer: string = randNum ? 'blue' : 'red';
-
             return { ...state, players: action.players,
                 curPlayer: firstPlayer,
                 score: initialState.score,
@@ -95,13 +94,15 @@ const memoReducer = (state = initialState, action: any) => {
 
         case 'OPEN__MEMO':
             const [ memo1, memo2 ] = memoPair;
-
+            // open pressed memo
             let newMemoTable: MemoTable = toggleMemo(memoTable, memoId, true);
+            // variables
             let nextClickIndex: number = clickIndex + 1;
             let updatedMemoPair: any[] = [...memoPair, { memoId, imgNum }];
             let nextPlayer: string = curPlayer;
             let isWinChecker: boolean = false;
-            const updatedScore: { [key: string]: number } = { ...score };
+            const updatedScore: Score = { ...score };
+
             updatedScore.clicks++;
             // close unequal memos pair
             if (clickIndex === 1 && memo2) {
@@ -118,10 +119,12 @@ const memoReducer = (state = initialState, action: any) => {
                     updatedMemoPair = [];
                     updatedScore.total++;
                     updatedScore[curPlayer]++;
+                    // is the game won?
                     if (updatedScore.total === tableSize){
                         isWinChecker = true;
                     }
-                } else if (players===2){
+                // change next player (if there are two players)
+                } else if (players === 2){
                     nextPlayer = curPlayer === 'red' ? 'blue' : 'red';
                 }
             }
