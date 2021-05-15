@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import './score.scss';
 
 type TScore = {
     curPlayer: string,

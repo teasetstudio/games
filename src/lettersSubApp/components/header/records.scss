@@ -1,0 +1,37 @@
+.records{
+    position: relative;
+    height: inherit;
+    &__wrapper{
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 7px;
+        outline: none;
+        padding: 15px 20px 15px 40px;
+        background-color: #a146a1;
+        color: black;
+        width: 250px;
+        overflow: hidden;
+        height: 47px;
+        transition: height .5s ease-out;
+        &:hover{
+            height: 330px;
+        }
+    }
+    p{
+        text-align: center;
+        margin-bottom: 15px;
+        letter-spacing: 7px;
+    }
+    li{
+        font-size: 1em;
+        margin-bottom: 5px;
+        letter-spacing: 2px;
+        &:first-of-type{
+            font-size: 1.1em;
+            margin-bottom: 13px;
+            font-weight: 700;
+            color: #eeb2f3;
+        }
+    }
+}

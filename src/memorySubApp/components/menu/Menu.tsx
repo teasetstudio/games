@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import * as actions from '../../memoActions';
-import './menu.scss';
 
 type TMenu = {
     menuOpen: boolean,

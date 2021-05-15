@@ -1,0 +1,32 @@
+.letter{
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    margin: 30px 8px;
+    box-shadow: -40px 0 40px $border3, 0 40px 40px $border3, 40px 0 40px $border3, 0 -40px 40px $border3;
+    &__wrapper{
+        transform: translateY(-100px);
+        transition: transform .3s ease;
+    }
+    &__wrapper_open{
+        transform: translateY(0px)!important;
+    }
+    &__item{
+        text-align: center;
+        font-size: 80px;
+        text-transform: uppercase;
+        height: 100px;
+        width: 100px;
+        line-height: 100px;
+        color: #ff058e;
+        background-color: #342c79;
+        box-shadow: -5px 0 15px $border inset, 0 5px 15px $border inset, 5px 0 15px $border inset, 0 -5px 15px $border inset;    
+    }
+    &__backface{
+        height: 100px;
+        width: 100px;
+        background-color: #5052d4;
+        border: 3px solid #0e1341;
+        box-shadow: -5px 0 15px $border4 inset, 0 5px 15px $border4 inset, 5px 0 15px $border4 inset, 0 -5px 15px $border4 inset;    
+    }
+}

@@ -1,0 +1,13 @@
+@import './menuBtn.scss';
+@import './menu.scss';
+@import './records.scss';
+
+.header{
+    position: relative;
+    z-index: 105;
+    &__inner{
+        padding: 15px 80px;
+        display: flex;
+        justify-content: space-between;
+    }
+}

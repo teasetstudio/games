@@ -1,5 +1,3 @@
-import './memoItem.scss';
-
 interface IMemoItem {
     id: number,
     imgNum: number,

@@ -1,0 +1,12 @@
+@import './modalSet.scss';
+
+.modal-wrapper{
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100vw;
+    z-index: 100;
+    &__rel{
+        position: relative;
+    }
+}

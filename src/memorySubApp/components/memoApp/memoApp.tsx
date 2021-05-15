@@ -1,12 +1,18 @@
 import MemoTable from '../memoTable/memoTable';
 import Header from '../header/header';
+import { Helmet } from 'react-helmet-async';
+import icon from '../../img/21.png';
 
-const MemoApp: React.FC = () => {
+const MemoApp = () => {
     return (
-        <div>
+        <main className='memory-page'>
+            <Helmet>
+                <title>Memory</title>
+                <link rel="icon" href={icon} />
+            </Helmet>
             <Header />
             <MemoTable />
-        </div>
+        </main>
     )
 }
 export default MemoApp;

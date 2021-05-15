@@ -1,0 +1,12 @@
+.letters-page{
+    background: linear-gradient(45deg, #210927, #06071b);
+    min-height: 100vh;
+
+    @import './variables.scss';
+    @import './components/modals/modalWrapper.scss';
+    @import './components/header/header.scss';
+    @import './components/mainTitle/mainTitle.scss';
+    @import './components/attempts/attempts.scss';
+    @import './components/word/word.scss';
+    @import './components/organaizer/organaizer.scss';
+}

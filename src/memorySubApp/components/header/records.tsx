@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import './records.scss';
 
 type TAnyArr = {
     records: {name: string, score: number}[]

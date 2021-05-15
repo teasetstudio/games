@@ -1,0 +1,14 @@
+.memory-page{
+    background: white;
+    min-height: 100vh;
+
+    @import './variables.scss';
+    @import "./components/header/header.scss";
+    @import "./components/header/organaizer.scss";
+    @import "./components/header/records.scss";
+    @import "./components/header/score.scss";
+    @import "./components/memoItem/memoItem.scss";
+    @import "./components/memoTable/memoTable.scss";
+    @import "./components/menu/menu.scss";
+    @import "./components/winModals/winModal.scss";
+}

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import './organaizer.scss';
 
 interface IOrganizer {
     clicks: number,

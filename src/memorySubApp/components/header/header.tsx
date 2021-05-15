@@ -6,7 +6,6 @@ import Menu from '../menu/Menu';
 import Records from './records';
 import Score from './score';
 import Organaizer from './organaizer';
-import './header.scss';
 
 type THeader = {
     players: number,

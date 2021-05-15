@@ -2,6 +2,7 @@ import MemoApp from './components/memoApp/memoApp';
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import memoReducer from './memoReducer';
+import './memory.scss';
 
 // For redux dev tools - google chrome extention
 declare global {

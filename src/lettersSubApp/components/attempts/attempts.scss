@@ -1,0 +1,36 @@
+.attempts{
+    padding-bottom: 30px;
+    &__hummer-area{
+        position: relative;
+        margin: 40px auto 0;
+        height: 90px;
+        width: 750px;
+    }
+    &__hummer-img{
+        position: absolute;
+        left: 45%;
+        transform-origin: 110% 110%;
+        transition: left .5s ease-in-out;
+    }
+    &__circle{
+        display: flex;
+        justify-content: center;
+        margin: 30px auto;
+        width: 750px;
+    }
+    &__item{
+        background-color: #7f429b;
+        border: 4px solid #25003d;
+        width: 34px;
+        height: 34px;
+        border-radius: 17px;
+        transition: all .3s ease .5s;
+        margin: 5px 10px;
+        box-shadow: -1px 0 20px #481770, 0 1px 60px $border4;
+        &_lose{
+            background: #241c41;
+            border-color: #19103a;
+            box-shadow: -1px 0 20px #1d0020, 0 1px 60px $border4;
+        }
+    }
+}
