@@ -9,10 +9,11 @@ interface IAttempts {
 const Attempts = ({ hummer, attempts, wrongLetters }: IAttempts) => {
 
     // hummer animation (on wrong letter inputed)
-    const hummerImg = useRef<any>(null);
-    const attemptDivList = useRef<any>(null);
+    const hummerImg = useRef<HTMLImageElement>(null);
+    const attemptDivList = useRef<HTMLDivElement>(null);
     let leftPos: number = -1;
-    if ( attemptDivList.current && wrongLetters.length !== 0 ) {
+    if ( attemptDivList.current && wrongLetters.length !== 0 && hummerImg.current ) {
+        // @ts-ignore
         leftPos = attemptDivList.current.children[wrongLetters.length - 1].offsetLeft + 23;
         let curLeftPos: number = +hummerImg.current.style.left.replace('px','');
         // curLeftPos !== leftPos - it prevents animtaion on right letter input
@@ -30,7 +31,6 @@ const Attempts = ({ hummer, attempts, wrongLetters }: IAttempts) => {
             });
         }
     } // end hummer anim
-
 
     return (
         <div className='attempts'>

@@ -7,18 +7,21 @@ import { Rec, TWord, TScore } from '../../types';
 interface IState {
     word: TWord,
     score: TScore,
+    attempts: number[],
     records: Rec,
     players: number,
     curPlayer: string,
     startedPlayer: string
 }
 interface IEndModal extends IState{
-    saveResult(name: string): void,
+    saveResult(name: Rec): void,
     restart(): void,
     lastWord(): void
 }
 
-const EndModal = ({ word, score, records , players, curPlayer, startedPlayer, restart, saveResult, lastWord }: IEndModal) => {
+const EndModal = ({ word, score, attempts, records , players, curPlayer,
+    startedPlayer, restart, saveResult, lastWord }: IEndModal) => {
+
     const wordString: string = word.map(({letter}) => letter).join('');
     const name = useRef<HTMLInputElement>(null);
     const btn = useRef<HTMLButtonElement>(null)
@@ -40,8 +43,12 @@ const EndModal = ({ word, score, records , players, curPlayer, startedPlayer, re
     function setRec(e: React.FormEvent<HTMLFormElement>): void {
         e.preventDefault();
         if (name.current) {
-            const inputName: string = name.current.value
-            saveResult(inputName);
+            const inputName: string = name.current.value;
+            let newRec: Rec = [...records, {name: inputName, score: score.blue}].sort((a, b) => b.score - a.score );
+            newRec.pop();
+            const category = attempts.length === 13 ? 'letterRecords' : 'letterRecords2';
+            localStorage.setItem(category, JSON.stringify(newRec));
+            saveResult(newRec);
         }
     }
 
@@ -113,5 +120,6 @@ const EndModal = ({ word, score, records , players, curPlayer, startedPlayer, re
         </>
     )
 }
-const mapStateToProps = ({ word, score, records, players, curPlayer, startedPlayer  }: IState) => ({ word, score, records, players, curPlayer, startedPlayer  })
+const mapStateToProps = ({ word, score, attempts, records, players, curPlayer, startedPlayer  }: IState) =>
+    ({ word, score, attempts, records, players, curPlayer, startedPlayer  })
 export default connect(mapStateToProps, actions)(EndModal)

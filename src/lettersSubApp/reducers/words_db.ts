@@ -1,4 +1,4 @@
-const getRandWord = (): string => wordsArr[Math.floor(Math.random() * wordsArr.length)];
+import { TWord } from '../types';
 
 const wordsArr: string[] = ['соль','сахар', 'кошка', 'собака', 'поршень', 'клен', 'дача', 'рождество', 'зима', 'весна',
     'маяк','любовь', 'цветок', 'туча', 'деньги', 'монета', 'звезда', 'платье', 'арбуз',
@@ -13,4 +13,9 @@ const wordsArr: string[] = ['соль','сахар', 'кошка', 'собака
     'грохот', 'кровать', 'садовник', 'водитель', 'крыша', 'фестиваль', 'жалюзи', 'хроника', 'фильм',
     'клавиша', 'галстук', 'служба', 'одеяло'];
 
-export default  getRandWord;
+// get a guess word and transform it to array
+const getRandWord = (): string => wordsArr[Math.floor(Math.random() * wordsArr.length)];
+const getWordArr = (word: string = getRandWord()): TWord => word.split('')
+    .map(l => ({letter: l, isOpen: false}));
+
+export default  getWordArr;

@@ -1,23 +1,7 @@
 import { AnyAction } from 'redux';
 import { TWord, Rec, TScore } from '../types';
 import { letterRec, letterRec2 } from './initialRecords';
-import getRandWord from './words_db';
-
-// get a guess word and transform it to array
-const getWordArr = (word: string = getRandWord()): TWord => word.split('')
-    .map(l => ({letter: l, isOpen: false}));
-
-// transform number of attempts to array with attempts length ( 1 - available attempt, 0 - wasted )
-const _transformAttempts = (attempts: number): number[] => Array(attempts).fill(1);
-
-// save player records in local storage
-function saveRec ( name: string, score: number, records: Rec, attempts: number): Rec {
-    let newRec = [...records, {name, score}].sort((a, b) => b.score - a.score );
-    newRec.pop();
-    const category = attempts === 13 ? 'letterRecords' : 'letterRecords2';
-    localStorage.setItem(category, JSON.stringify(newRec));
-    return newRec;
-}
+import getWordArr from './words_db';
 
 // reducer initial state
 interface IState {
@@ -40,7 +24,7 @@ const initialState: IState = {
     curPlayer: 'blue',
     startedPlayer: 'blue',
     word: getWordArr(),
-    attempts: _transformAttempts(13),
+    attempts: [...Array(13).fill(1)],
     wrongLetters: [],
     usedLetters: [],
     score: {
@@ -56,29 +40,31 @@ const initialState: IState = {
 // reducer
 const letterReducer = ( state = initialState, actions: AnyAction ) => {
     const { players, curPlayer, startedPlayer, word, attempts,wrongLetters,
-        usedLetters, gameState, seconds, score, guessedWords, records } = state;
-    const { type, letter, addScore, name, newWord, level } = actions;
+        usedLetters, gameState, seconds, score, guessedWords } = state;
+    const { type, letter, addScore, newRec, level, wordArr, randNum } = actions;
     switch (type) {
         case 'START__LEVEL': {
+            const updateRec = level === 13 ? letterRec : letterRec2;
             const statesToUpdate = players === 1 ? {
-                word:  getWordArr(),
+                word:  wordArr,
             } : {
                 gameState: 'nextword',
                 startedPlayer: curPlayer
             }
             return { ...state, ...statesToUpdate,
-                attempts: _transformAttempts(level),
+                attempts: [...Array(level).fill(1)],
                 wrongLetters: [],
                 usedLetters: [],
                 score: initialState.score,
                 seconds: 0,
                 guessedWords: 0,
+                records: updateRec,
                 isTimerOn: false
             }}
         case 'ONE__PLAYER': {
             return { ...state,
                 players: 1,
-                word:  getWordArr(),
+                word:  wordArr,
                 attempts: [...attempts.fill(1)],
                 curPlayer: 'blue',
                 wrongLetters: [],
@@ -87,11 +73,9 @@ const letterReducer = ( state = initialState, actions: AnyAction ) => {
                 seconds: 0,
                 guessedWords: 0,
                 gameState: 'game',
-                records: letterRec,
                 isTimerOn: false
             }}
         case 'TWO__PLAYERS': {
-            const randNum: number = Math.floor(Math.random() * 2);
             const firstPlayer: string = randNum ? 'blue' : 'purple';
             return { ...state,
                 players: 2,
@@ -103,7 +87,6 @@ const letterReducer = ( state = initialState, actions: AnyAction ) => {
                 seconds: 0,
                 guessedWords: 0,
                 gameState: 'nextword',
-                records: letterRec2,
                 isTimerOn: false
             }}
         case 'LETTER__INPUT': {
@@ -153,7 +136,7 @@ const letterReducer = ( state = initialState, actions: AnyAction ) => {
             let nextPlayer = curPlayer === 'blue' ? 'purple' : 'blue';
             return { ...state,
                 curPlayer: nextPlayer,
-                word: getWordArr(newWord),
+                word: wordArr,
                 attempts: [...attempts.fill(1)],
                 wrongLetters: [],
                 usedLetters: [],
@@ -164,9 +147,10 @@ const letterReducer = ( state = initialState, actions: AnyAction ) => {
             const updateScore: TScore = {...score};
             updateScore[curPlayer] += addScore;
             const statesToUpdate = players === 1 ? {
-                word: getWordArr(),
+                word: wordArr,
                 attempts: [...attempts.fill(1)],
                 gameState: 'game',
+                seconds: 0,
                 wrongLetters: [],
                 usedLetters: [],
             } : {
@@ -180,13 +164,12 @@ const letterReducer = ( state = initialState, actions: AnyAction ) => {
         case 'LAST__WORD': {
             return { ...state,
                 startedPlayer: 'lastturn',
-                seconds: 0,
                 gameState: 'nextword'
             }}
         case 'RESTART': {
             const updateGameState = players === 1 ? 'game' : 'nextword';
             return { ...state,
-                word: getWordArr(),
+                word: wordArr,
                 startedPlayer: curPlayer,
                 attempts: [...attempts.fill(1)],
                 score: initialState.score,
@@ -199,7 +182,7 @@ const letterReducer = ( state = initialState, actions: AnyAction ) => {
             }}
         case 'SAVE__REC': {
             return { ...state,
-                word: getWordArr(),
+                word: wordArr,
                 attempts: [...attempts.fill(1)],
                 score: initialState.score,
                 wrongLetters: [],
@@ -207,7 +190,7 @@ const letterReducer = ( state = initialState, actions: AnyAction ) => {
                 seconds: 0,
                 guessedWords: 0,
                 gameState: 'game',
-                records: saveRec(name, score.blue, records, attempts.length)
+                records: newRec
             }}
         case 'TIMER__TICK': {
             return { ...state,

@@ -1,14 +1,22 @@
 // ACTIONS
-interface ISetLevel {
+interface ISetLevel{
     type: string,
-    level: number
+    level: number,
+    wordArr: TWord
 }
-interface ISetPlayers {
-    type: string
-}
-interface INextWord {
+interface IOnePlayersAndRe {
     type: string,
-    addScore: number
+    wordArr: TWord
+}
+interface ITwoPlayers{
+    type: string,
+    wordArr: TWord,
+    randNum: number
+}
+interface INextWord{
+    type: string,
+    addScore: number,
+    wordArr: TWord
 }
 interface IInputed {
     type: string,
@@ -16,16 +24,14 @@ interface IInputed {
 }
 interface ISaveRec {
     type: string,
-    name: string
+    newRec: Rec,
+    wordArr: TWord
 }
-interface IRestart {
+interface ITick {
     type: string
 }
-interface ISetWord {
-    type: string,
-    newWord: string
-}
-export type Actions = ISetLevel | ISetPlayers | INextWord | IInputed | ISaveRec | IRestart | ISetWord
+
+export type Actions = ISetLevel | IOnePlayersAndRe | ITwoPlayers | INextWord | IInputed | ISaveRec | ITick
 // reducer
 export type TWord = {letter: string, isOpen: boolean}[]
 // records array

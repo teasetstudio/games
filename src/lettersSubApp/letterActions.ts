@@ -1,18 +1,24 @@
-import { Actions } from './types';
+import { Actions, Rec } from './types';
+import getWordArr from './reducers/words_db'
 
 const levelStart = (level: number = 7): Actions => ({
     type: 'START__LEVEL',
-    level
+    level,
+    wordArr: getWordArr()
 })
 const onePlayer = (): Actions => ({
-    type: 'ONE__PLAYER'
+    type: 'ONE__PLAYER',
+    wordArr: getWordArr()
 })
 const twoPlayers = (): Actions => ({
-    type: 'TWO__PLAYERS'
+    type: 'TWO__PLAYERS',
+    wordArr: getWordArr(),
+    randNum: Math.floor(Math.random() * 2)
 })
 const nextWord = (addScore: number = 0): Actions => ({
     type: 'NEXT__WORD',
-    addScore
+    addScore,
+    wordArr: getWordArr()
 })
 const lastWord = (): Actions => ({
     type: 'LAST__WORD'
@@ -23,14 +29,16 @@ const letterInputed = (letter: string): Actions => ({
 })
 const setInputedWord = (newWord: string): Actions => ({
     type: 'SET__INPUTED_WORD',
-    newWord
+    wordArr: getWordArr(newWord)
 })
 const restart = (): Actions => ({
-    type: 'RESTART'
+    type: 'RESTART',
+    wordArr: getWordArr()
 })
-const saveResult = (name: string): Actions => ({
+const saveResult = (newRec: Rec): Actions => ({
     type: 'SAVE__REC',
-    name
+    newRec,
+    wordArr: getWordArr()
 })
 const timerTick = (): Actions => ({
     type: 'TIMER__TICK'
