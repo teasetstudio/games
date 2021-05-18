@@ -13,6 +13,9 @@
         transition: left .5s ease-in-out;
     }
     &__circle{
+        // pos relative is very important for hummer animation in attempts.tsx
+        // it needs for right number of offsetLeft
+        position: relative;
         display: flex;
         justify-content: center;
         margin: 30px auto;

@@ -7,6 +7,9 @@
     &__wrapper{
         transform: translateY(-100px);
         transition: transform .3s ease;
+        &.zero-click{
+            transition-duration: 0s!important;
+        }
     }
     &__wrapper_open{
         transform: translateY(0px)!important;

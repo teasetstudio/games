@@ -1,5 +1,5 @@
-import { connect } from "react-redux"
-import { Rec } from '../../types'
+import { connect } from "react-redux";
+import { Rec } from '../../types';
 
 interface IState {
     records: Rec
@@ -19,4 +19,5 @@ const Records = ({ records }: IState) => {
     )
 }
 const mapStateToMap = ({ records }: IState) => ({ records })
+
 export default connect(mapStateToMap)(Records)

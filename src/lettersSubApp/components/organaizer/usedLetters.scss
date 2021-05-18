@@ -1,0 +1,15 @@
+.used-letters{
+    text-align: right;
+    width: 210px;
+    margin: 0 auto;
+    &__item{
+        color: $fontBlue;
+        display: inline-block;
+        font-size: 1.8rem;
+        margin: 0 15px;
+        text-decoration: line-through #860065;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 15px #473294;
+    
+    }
+}

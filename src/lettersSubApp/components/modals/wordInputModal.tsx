@@ -23,7 +23,7 @@ const WordInputModal = ({ curPlayer, setInputedWord }: IState) => {
     function setWord(e: React.FormEvent<HTMLFormElement>): void {
         e.preventDefault();
         if (name.current) {
-            const inputName: string = name.current.value;
+            const inputName: string = name.current.value.toLowerCase();
             setInputedWord(inputName);
         }
     }
@@ -46,8 +46,10 @@ const WordInputModal = ({ curPlayer, setInputedWord }: IState) => {
     return (
         <form className='modal-set' onSubmit={setWord} onKeyDown={IsEnterPressed}>
             <h3><span className={`modal-set__player modal-set__${curPlayer}`}>{playerTitle}</span></h3>
-            <p className='modal-set__text'>Загадывай слово ниже:</p>
-            <input className='modal-set__input-word' type="password" ref={name} required maxLength={12} /><br />
+            <p className='modal-set__text'>Загадывай слово ниже:</p><br />
+            <p className='modal-set__text'>Вводить можно только русские буквы.</p>
+            <p className='modal-set__text'>Длинна от 3 до 12 букв.</p>
+            <input className='modal-set__input-word' type="password" ref={name} required pattern="[А-Яа-яЁё]{3,12}" /><br />
             <button id='input-submit-word' className="modal-set__btn" type='submit'>Enter</button>
             <button className="modal-set__show-btn" type='button'
                 onMouseDown={showWord} onMouseUp={hideWord} > 

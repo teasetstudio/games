@@ -1,4 +1,8 @@
 // ACTIONS
+interface ISetLevel {
+    type: string,
+    level: number
+}
 interface ISetPlayers {
     type: string
 }
@@ -21,7 +25,7 @@ interface ISetWord {
     type: string,
     newWord: string
 }
-export type Actions = ISetPlayers | INextWord | IInputed | ISaveRec | IRestart | ISetWord
+export type Actions = ISetLevel | ISetPlayers | INextWord | IInputed | ISaveRec | IRestart | ISetWord
 // reducer
 export type TWord = {letter: string, isOpen: boolean}[]
 // records array

@@ -1,0 +1,23 @@
+.info{
+    display: flex;
+    &__item{
+        margin: 0 30px;
+        text-align: center;
+    }
+    &__title{
+        color: #860065;
+        margin-bottom: 10px;
+        font-size: .9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 10px #832596;
+    }
+    &__number{
+        color: $fontBlue;
+        font-size: 3rem;
+        margin: 0 15px;
+        text-transform: uppercase;
+        text-shadow: 3px 3px 60px #a691f3;
+    
+    }
+}

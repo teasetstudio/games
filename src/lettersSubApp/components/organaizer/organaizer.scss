@@ -1,47 +1,11 @@
 @import './letterInput.scss';
+@import './usedLetters.scss';
+@import './info.scss';
 .organaizer{
     display: flex;
     justify-content: space-between;
     &__side{
         padding: 45px 100px 0;
         flex: 1;
-    }
-}
-.used-letters{
-    text-align: right;
-    width: 210px;
-    margin: 0 auto;
-    &__item{
-        color: $fontBlue;
-        display: inline-block;
-        font-size: 1.8rem;
-        margin: 0 15px;
-        text-decoration: line-through #860065;
-        text-transform: uppercase;
-        text-shadow: 2px 2px 15px #473294;
-    
-    }
-}
-.info{
-    display: flex;
-    &__item{
-        margin: 0 30px;
-        text-align: center;
-    }
-    &__title{
-        color: #860065;
-        margin-bottom: 10px;
-        font-size: .9rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-shadow: 1px 1px 10px #832596;
-    }
-    &__number{
-        color: $fontBlue;
-        font-size: 3rem;
-        margin: 0 15px;
-        text-transform: uppercase;
-        text-shadow: 3px 3px 60px #a691f3;
-    
     }
 }

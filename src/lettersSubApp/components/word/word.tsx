@@ -4,17 +4,20 @@ import { TWord } from '../../types';
 
 interface IWord {
     word: TWord,
-    players: number
+    usedLetters: string[]
 }
-const Word = ({word, players}: IWord) => {
+const Word = ({ word, usedLetters }: IWord) => {
     console.log('word', word.map(({letter}) => letter).join(''))
-    
     return (
         <div className='word-box'>
-            {word.map(({letter, isOpen}, id) => <Letter key={id} letter={letter} isOpen={isOpen} />)}
+            {word.map(({letter, isOpen}, id) => 
+                <Letter key={id}
+                    letter={letter}
+                    isOpen={isOpen}
+                    usedLetters={usedLetters} />)}
         </div>
     )
 }
-const mapStateToProps = ({word, players}: IWord) => ({word, players})
+const mapStateToProps = ({ word, usedLetters }: IWord) => ({ word, usedLetters })
 
 export default connect(mapStateToProps)(Word)

@@ -1,6 +1,6 @@
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
-import letterReducer from './letterReducer';
+import letterReducer from './reducers/letterReducer';
 import LetterApp from './components/letterApp/letterApp';
 import './letterHummer.scss';
 

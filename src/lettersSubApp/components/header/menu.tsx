@@ -3,19 +3,20 @@ import * as actions from '../../letterActions';
 
 interface IMenu {
     menuOpen: boolean,
+    levelStart(level: number): void,
     menuToggle(p: boolean): void,
     onePlayer(): void,
     twoPlayers(): void
 }
-const Menu = ({ menuOpen, menuToggle, onePlayer, twoPlayers }: IMenu) => {
+const Menu = ({ menuOpen, menuToggle, levelStart, onePlayer, twoPlayers }: IMenu) => {
     return (
         <div className={`menu container ${menuOpen ? 'menu-open' : ''}`}
-                onMouseLeave={() => menuToggle(false)}>
+                onMouseLeave={() => menuToggle(false)} >
             <div className="menu__block">
                 <h3>Сложность:</h3>
                 <div className="menu__btns">
-                    <button className="menu__item">Норма</button>
-                    <button className="menu__item">Сложно</button>
+                    <button className="menu__item" onClick={() => levelStart(13)} >Норма</button>
+                    <button className="menu__item" onClick={() => levelStart(7)} >Сложно</button>
                 </div>
             </div>
 
