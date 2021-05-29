@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { TWord, Rec, TScore } from '../types';
 import { letterRec, letterRec2 } from './initialRecords';
-import getWordArr from './words_db';
+import getWordArr from './initialWords';
 
 // reducer initial state
 interface IState {

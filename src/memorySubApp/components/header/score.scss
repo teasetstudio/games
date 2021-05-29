@@ -24,16 +24,18 @@
     &__red{
         background-color: #cfa78f;
     }
-    .active-red &__red, .active-blue &__blue{
-        transform: scale(1.15);
-        box-shadow: 1px 1px 7px black;
-    }
+    
     .active-red &__red{
         background-color: #da7a3e;
     }
     .active-blue &__blue{
         background-color: #2aa7e0;
     }
+}
+
+.active-red .score__red, .active-blue .score__blue{
+    transform: scale(1.1);
+    box-shadow: 1px 1px 7px black;
 }
 
 .score__slider{

@@ -1,5 +1,5 @@
 import { Actions, Rec } from './types';
-import getWordArr from './reducers/words_db'
+import getWordArr from './reducers/initialWords';
 
 const levelStart = (level: number = 7): Actions => ({
     type: 'START__LEVEL',

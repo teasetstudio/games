@@ -13,13 +13,14 @@ type THeader = {
 }
 
 const Header = ({ players, isWin }: THeader) => {
+    console.log('players', players)
     const [menuOpen, toggleMenu] = useState(false);
 
     return (
         <div className='header'>
             <div className='header__wrapper container'>
                 <Organaizer toggleMenu={toggleMenu} />
-
+                
                 {players === 2 ? <Score /> : null }
 
                 <Records />

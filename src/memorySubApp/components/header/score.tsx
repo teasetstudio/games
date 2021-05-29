@@ -8,6 +8,7 @@ type TScore = {
 
 const Score = ({ curPlayer, redScore, blueScore }: TScore) => {
     const activeClass: string = curPlayer === 'red' ? 'active-red' : 'active-blue';
+    console.log('curPlayer', curPlayer)
     return (
         <>
         <div className={`score ${activeClass}`}>
